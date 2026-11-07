@@ -5,6 +5,10 @@ modèles d'IA que vous pouvez réellement faire tourner — en local (Ollama) ou
 
 **100 % côté navigateur** : aucune donnée n'est envoyée à un serveur, aucun backend.
 
+### 🔗 Démo en ligne
+
+**https://kadohack12.github.io/ai-machine-advisor/**
+
 ## ✨ Fonctionnalités
 
 - **Estimation d'empreinte mémoire** selon la quantification (Q4/Q5/Q8) et le KV cache.
@@ -27,11 +31,11 @@ python3 -m http.server 8000
 
 ## 🌐 Déploiement
 
-Le site est statique : n'importe quel hébergeur convient (Vercel, Netlify, GitHub Pages).
+Le site est statique : n'importe quel hébergeur convient.
 
-```bash
-vercel --prod
-```
+**GitHub Pages** (actif) : Settings → Pages → branche `main`, dossier `/`.
+
+**Vercel / Netlify** : importez le dépôt, aucune configuration de build (site statique).
 
 ## 🧠 Comment fonctionne la recommandation
 
