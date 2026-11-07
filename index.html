@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Machine Advisor — Quel modèle IA pour votre machine ?</title>
+<meta name="description" content="Analysez votre machine (RAM, VRAM, GPU) et découvrez le modèle d'IA le plus performant que vous pouvez faire tourner, en local ou via API.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="glow glow-a"></div>
+<div class="glow glow-b"></div>
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-mark">◈</span>
+    <span>AI Machine <b>Advisor</b></span>
+  </a>
+  <a class="ghlink" href="https://github.com/kadohack12/ai-machine-advisor" target="_blank" rel="noopener">GitHub ↗</a>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="pill">100 % local dans votre navigateur · aucune donnée envoyée</span>
+    <h1>Quel modèle d'IA peut vraiment tourner<br><span class="grad">sur votre machine&nbsp;?</span></h1>
+    <p class="sub">Décrivez votre matériel. On calcule la liste des modèles (locaux et API) que vous pouvez faire tourner, classés par performance réelle — avec la commande d'installation.</p>
+  </section>
+
+  <section class="layout">
+    <form class="panel form" id="form" autocomplete="off">
+      <h2>Votre configuration</h2>
+
+      <div class="field">
+        <label for="ram">Mémoire RAM <output id="ramOut">16 Go</output></label>
+        <input type="range" id="ram" min="2" max="256" step="2" value="16">
+        <div class="ticks"><span>2</span><span>64</span><span>128</span><span>256 Go</span></div>
+      </div>
+
+      <div class="field">
+        <label for="vram">Mémoire vidéo (VRAM) <output id="vramOut">8 Go</output></label>
+        <input type="range" id="vram" min="0" max="96" step="1" value="8">
+        <div class="ticks"><span>0</span><span>24</span><span>48</span><span>96 Go</span></div>
+      </div>
+
+      <div class="field">
+        <label for="gpu">Type de GPU</label>
+        <select id="gpu">
+          <option value="none">Aucun (CPU seul)</option>
+          <option value="igpu">GPU intégré (Intel / AMD iGPU)</option>
+          <option value="apple">Apple Silicon (M1 / M2 / M3 / M4)</option>
+          <option value="nvidia" selected>NVIDIA GeForce / RTX</option>
+          <option value="amd">AMD Radeon</option>
+          <option value="pro">GPU pro / serveur (A100, H100, L40S…)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="cores">Cœurs CPU <output id="coresOut">8</output></label>
+        <input type="range" id="cores" min="2" max="64" step="2" value="8">
+      </div>
+
+      <div class="field two">
+        <div>
+          <label for="os">Système</label>
+          <select id="os">
+            <option>Windows</option>
+            <option>macOS</option>
+            <option selected>Linux</option>
+          </select>
+        </div>
+        <div>
+          <label for="usecase">Usage principal</label>
+          <select id="usecase">
+            <option value="chat" selected>Chat général</option>
+            <option value="code">Code</option>
+            <option value="writing">Rédaction</option>
+            <option value="reasoning">Raisonnement</option>
+            <option value="vision">Vision / images</option>
+            <option value="agents">Agents / outils</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="cta">Analyser ma machine</button>
+      <p class="hint">Rien n'est envoyé sur un serveur : tout est calculé localement.</p>
+    </form>
+
+    <section class="panel results" id="results" aria-live="polite">
+      <div class="placeholder" id="placeholder">
+        <div class="ph-icon">◈</div>
+        <p>Renseignez votre configuration puis lancez l'analyse.</p>
+      </div>
+    </section>
+  </section>
+
+  <section class="explain">
+    <h2>Comment ça marche&nbsp;?</h2>
+    <div class="cards3">
+      <article><h3>1. Empreinte mémoire</h3><p>Chaque modèle a une empreinte réelle selon sa quantification (Q4, Q5, Q8). On la compare à votre RAM et votre VRAM.</p></article>
+      <article><h3>2. Accélération</h3><p>Un GPU change tout : un modèle 70B est inutilisable sur CPU mais fluide sur 24&nbsp;Go de VRAM. Le score intègre le débit estimé.</p></article>
+      <article><h3>3. Recommandation</h3><p>Le meilleur compromis qualité / vitesse pour votre usage, avec la commande prête à copier (Ollama) ou l'alternative API.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>AI Machine Advisor — projet open source. Les estimations sont indicatives et dépendent de la quantification et du moteur d'inférence.</p>
+  <p class="by">par <a href="https://kadohacklabs.blogspot.com/" target="_blank" rel="noopener">KadoHackLabs</a></p>
+</footer>
+
+<script src="data/models.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
